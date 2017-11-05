@@ -12,18 +12,18 @@ import { AlunoService } from './aluno.service';
 
 export class DiscrepanciasComponent implements OnInit {
 	constructor(private alunoService: AlunoService) {}
-	tests: discrepantesWrapper[] = [];
+	alunos: discrepantesWrapper[] = [];
 
 	ngOnInit(): void {
 		this.alunoService.getAlunos()
 		.then(alunos => {
 			for(let a in alunos){				
-				this.tests[a] = new discrepantesWrapper();
-				this.tests[a].aluno = alunos[a];
-				this.tests[a].porcentagemDiscrepantes = this.calculaPorcentagemDiscrepantes(alunos[a]);
-				this.tests[a].avaliacaoDiscrepante = this.tests[a].porcentagemDiscrepantes >= 0.25;
+				this.alunos[a] = new discrepantesWrapper();
+				this.alunos[a].aluno = alunos[a];
+				this.alunos[a].porcentagemDiscrepantes = this.calculaPorcentagemDiscrepantes(alunos[a]);
+				this.alunos[a].avaliacaoDiscrepante = this.alunos[a].porcentagemDiscrepantes >= 0.25;
 			}
-			this.tests.sort(this.discrepantesCompare);
+			this.alunos.sort(this.discrepantesCompare);
 		})
 		.catch(erro => alert(erro));
 	}
