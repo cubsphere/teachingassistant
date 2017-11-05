@@ -1,0 +1,26 @@
+<table>
+<tr>
+   <th rowspan="2">Nome</th>
+   <th rowspan="2">CPF</th>
+   <th rowspan="2">e-mail</th>
+   <th colspan="2">Requisitos</th>
+   <th colspan="2">Gerência de Configuração</th>
+   <th rowspan="2">Metas discrepantes</th>
+</tr>
+<tr>
+   <th>Professor</th>
+   <th>Auto-avaliação</th>
+   <th>Professor</th>
+   <th>Auto-avaliação</th>
+</tr>
+<tr *ngFor="let a of alunos; index as i">
+   <td>{{a.nome}}</td>
+   <td>{{a.cpf}}</td>
+   <td>{{a.email}}</td>
+   <td class="meta">{{a.metas['requisitos']}}</td>
+   <td class="meta">{{a.autoAval['requisitos']}}</td>
+   <td class="meta">{{a.metas['gerDeConfiguracao']}}</td>
+   <td class="meta">{{a.autoAval['gerDeConfiguracao']}}</td>
+   <td class="meta">{{porcentagemDiscrepantes[i]*100}}%</td>
+</tr>
+</table>

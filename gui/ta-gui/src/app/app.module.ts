@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MetasComponent } from './metas.component';
 import { AlunosComponent } from './alunos.component';
 import { AutoAvalComponent } from './autoaval.component';
+import { DiscrepanciasComponent } from './discrepancias.component';
 import { AlunoService } from './aluno.service';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AlunoService } from './aluno.service';
     AppComponent,
     MetasComponent,
     AlunosComponent,
-	AutoAvalComponent
+	AutoAvalComponent,
+	DiscrepanciasComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,10 @@ import { AlunoService } from './aluno.service';
       {
         path: 'autoAval',
         component: AutoAvalComponent
+      },
+      {
+        path: 'discrepancias',
+        component: DiscrepanciasComponent
       }
     ])
   ],

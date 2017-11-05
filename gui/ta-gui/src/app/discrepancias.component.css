@@ -1,0 +1,28 @@
+th {
+  background-color: #3399ff;
+  color: #ffffff;
+}
+
+td, th {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+th.empty {
+  background-color: #ffffff;
+}
+
+tr:hover {
+  background-color: #cce6ff;
+}
+
+.meta {
+  text-align: center;
+  width: 20px;
+}
+
+.discrepante {
+  color: #ee1111;
+  text-align: center;
+  width: 20px;
+}
