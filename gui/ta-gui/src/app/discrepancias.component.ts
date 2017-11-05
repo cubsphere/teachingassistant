@@ -12,16 +12,16 @@ import { AlunoService } from './aluno.service';
 
 export class DiscrepanciasComponent implements OnInit {
 	constructor(private alunoService: AlunoService) {}
-	alunos: discrepantesWrapper[] = [];
+	alunos: wrapper[] = [];
 
 	ngOnInit(): void {
 		this.alunoService.getAlunos()
 		.then(alunos => {
 			for(let a in alunos){				
-				this.alunos[a] = new discrepantesWrapper();
+				this.alunos[a] = new wrapper();
 				this.alunos[a].aluno = alunos[a];
-				this.alunos[a].porcentagemDiscrepantes = this.calculaPorcentagemDiscrepantes(alunos[a]);
-				this.alunos[a].avaliacaoDiscrepante = this.alunos[a].porcentagemDiscrepantes >= 0.25;
+				this.alunos[a].porcentagem = this.calculaPorcentagemDiscrepantes(alunos[a]);
+				this.alunos[a].avaliacao = this.alunos[a].porcentagem >= 0.25;
 			}
 			this.alunos.sort(this.discrepantesCompare);
 		})
@@ -44,14 +44,14 @@ export class DiscrepanciasComponent implements OnInit {
 		(aluno.autoAval[i] === "MPA" && aluno.metas[i]==="MANA"));
 	}
 	
-	discrepantesCompare(a:discrepantesWrapper, b:discrepantesWrapper): number {
-		return b.porcentagemDiscrepantes - a.porcentagemDiscrepantes;
+	discrepantesCompare(a:wrapper, b:wrapper): number {
+		return b.porcentagem - a.porcentagem;
 	}
 }
 
-class discrepantesWrapper {
+class wrapper {
 	constructor(){}
 	aluno: Aluno;
-	porcentagemDiscrepantes: number;
-	avaliacaoDiscrepante: boolean;
+	porcentagem: number;
+	avaliacao: boolean;
 }
