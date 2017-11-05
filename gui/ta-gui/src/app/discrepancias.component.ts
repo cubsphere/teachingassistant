@@ -23,6 +23,7 @@ export class DiscrepanciasComponent implements OnInit {
 				this.alunos[a].porcentagem = this.calculaPorcentagemDiscrepantes(alunos[a]);
 			}
 			this.alunos.sort(this.discrepantesCompare);
+			this.alunos = this.alunos.filter(aluno => aluno.porcentagem >= 0.25);
 		})
 		.catch(erro => alert(erro));
 	}
