@@ -42,6 +42,16 @@ app.put('/aluno', function (req: express.Request, res: express.Response) {
   }
 })
 
+app.put('/autoAval', function (req: express.Request, res: express.Response) {
+  var aluno: Aluno = <Aluno> req.body;
+  aluno = cadastro.autoAvaliar(aluno);
+  if (aluno) {
+    res.send({"success": "O registro foi realizado com sucesso"});
+  } else {
+    res.send({"failure": "O registro não pode ser realizado"});
+  }
+})
+
 var server = app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })

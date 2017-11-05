@@ -1,0 +1,15 @@
+<table>
+<tr>
+   <th width=120>CPF</th>
+   <th width=120>Requisitos</th>
+   <th width=120>Gerência de Configuração</th>
+</tr>
+<tr>
+   <td><input [(ngModel)]="a.cpf" (change)="wipeMessages()"></td>
+   <td class="meta"><input [(ngModel)]="a.autoAval['requisitos']" (change)="wipeMessages()"></td>
+   <td class="meta"><input [(ngModel)]="a.autoAval['gerDeConfiguracao']" (change)="wipeMessages()"></td>
+   <td><button (click)="autoAvaliar()">Submeter</button></td>
+   <td *ngIf="sucesso">Avaliação submetida!</td>
+   <td *ngIf="erro">Falha na submissão</td>
+</tr>
+</table>

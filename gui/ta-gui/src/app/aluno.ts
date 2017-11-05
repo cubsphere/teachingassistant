@@ -3,6 +3,7 @@ export class Aluno {
   cpf: string;
   email: string;
   metas: Map<string,string>;
+  autoAval: Map<string,string>;
 
   constructor() {
     this.clean();
@@ -12,7 +13,14 @@ export class Aluno {
     this.nome = "";
     this.cpf = "";
     this.email = "";
-    this.metas = new Map<string,string>();
+    this.metas = this.mapInit(new Map<string,string>());
+    this.autoAval = this.mapInit(new Map<string,string>());
+  }
+  
+  mapInit(mappy: Map<string,string>): Map<string,string> {
+     mappy['requisitos'] = "";
+     mappy['gerDeConfiguracao'] = "";
+	 return mappy;
   }
 
   clone(): Aluno {
@@ -27,6 +35,7 @@ export class Aluno {
     this.cpf = from.cpf;
     this.email = from.email;
     this.copyMetasFrom(from.metas);
+    this.copyAutoAvalFrom(from.autoAval);
   }
 
   copyMetasFrom(from: Map<string,string>): void {
@@ -34,5 +43,19 @@ export class Aluno {
     for (let key in from) {
       this.metas[key] = from[key];
     }
+  }
+  
+  copyAutoAvalFrom(from: Map<string,string>): void {
+    this.autoAval = new Map<string,string>();
+    for (let key in from) {
+      this.autoAval[key] = from[key];
+    }
+  }
+  
+  autoAvalFaltandoMetas(): boolean {
+    for (let key in this.autoAval) {
+	  if (this.autoAval[key] === "") {return true;}
+	}
+	return false;
   }
 }

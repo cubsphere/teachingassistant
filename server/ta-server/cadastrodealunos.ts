@@ -13,14 +13,24 @@ export class CadastroDeAlunos {
     return result;
   }
 
-  cpfNaoCadastrado(cpf: string): boolean {
-     return !this.alunos.find(a => a.cpf == cpf);
-  }
-
   atualizar(aluno: Aluno): Aluno {
-    var result: Aluno = this.alunos.find(a => a.cpf == aluno.cpf);
+    var result: Aluno = this.alunoComCPF(aluno.cpf);
     if (result) result.copyFrom(aluno);
     return result;
+  }
+  
+  autoAvaliar(aluno: Aluno): Aluno {
+     var result: Aluno = this.alunoComCPF(aluno.cpf);
+	 if (result) result.copyAutoAvalFrom(aluno.autoAval);
+	 return result;
+  }
+
+  cpfNaoCadastrado(cpf: string): boolean {
+     return !this.alunoComCPF(cpf);
+  }
+  
+  alunoComCPF(cpf: string): boolean {
+     return this.alunos.find(a => a.cpf == cpf);
   }
 
   getAlunos(): Aluno[] {

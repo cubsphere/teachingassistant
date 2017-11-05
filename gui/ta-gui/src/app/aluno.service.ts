@@ -36,6 +36,15 @@ export class AlunoService {
              .then(res => res.json() as Aluno[])
              .catch(this.tratarErro);
   }
+  
+  submeterAutoAval(aluno: Aluno): Promise<Aluno> {
+	return this.http.put(this.taURL + "/autoAval",JSON.stringify(aluno), {headers:this.headers})
+	     .toPromise()
+	     .then(res => {
+	        if (res.json().success) {return aluno;} else {return null;}
+	     })
+	     .catch(this.tratarErro);
+  }
 
   private tratarErro(erro: any): Promise<any>{
     console.error('Acesso mal sucedido ao serviço de alunos',erro);
