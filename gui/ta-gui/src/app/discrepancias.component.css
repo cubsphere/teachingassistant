@@ -8,20 +8,17 @@ td, th {
   border-bottom: 1px solid #ddd;
 }
 
-th.empty {
-  background-color: #ffffff;
-}
-
 tr:hover {
   background-color: #cce6ff;
 }
 
-.meta {
+.conceito {
   text-align: center;
   width: 20px;
 }
 
-.discrepante {
+.redconceito {
+  font-weight: bold;
   color: #ee1111;
   text-align: center;
   width: 20px;

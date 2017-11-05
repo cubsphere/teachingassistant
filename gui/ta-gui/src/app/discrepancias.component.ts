@@ -13,6 +13,7 @@ export class DiscrepanciasComponent implements OnInit {
 	constructor(private alunoService: AlunoService) {}
 	alunos: Aluno[];
 	porcentagemDiscrepantes: number[] = [];
+	avaliacaoDiscrepante: boolean[] = [];
 
 	ngOnInit(): void {
 		this.alunoService.getAlunos()
@@ -20,6 +21,7 @@ export class DiscrepanciasComponent implements OnInit {
 			this.alunos = alunos;
 			for(let a in alunos){
 				this.porcentagemDiscrepantes[a] = this.calculaPorcentagemDiscrepantes(alunos[a]);
+				this.avaliacaoDiscrepante[a] = (this.porcentagemDiscrepantes[a] >= 0.25);
 			}
 		})
 		.catch(erro => alert(erro));
@@ -29,15 +31,15 @@ export class DiscrepanciasComponent implements OnInit {
 		var retorno = 0, counter = 0;
 		for (let i in aluno.metas) {
 			counter++;
-			if(this.metaDiscrepante(aluno.metas[i], aluno.autoAval[i])) {
+			if(this.metaDiscrepante(aluno, i)) {
 				retorno += 1;
 			}
 		}
 		return retorno/counter;
 	}
 	
-	metaDiscrepante(conceitoProf: string, conceitoAuto: string): boolean {
-		return ((conceitoAuto === "MA" && (conceitoProf==="MPA" || conceitoProf==="MANA")) ||
-		(conceitoAuto === "MPA" && conceitoProf==="MANA"));
+	metaDiscrepante(aluno: Aluno, i: string): boolean {
+		return ((aluno.autoAval[i] === "MA" && (aluno.metas[i]==="MPA" || aluno.metas[i]==="MANA")) ||
+		(aluno.autoAval[i] === "MPA" && aluno.metas[i]==="MANA"));
 	}
 }
