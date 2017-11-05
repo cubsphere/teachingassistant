@@ -9,20 +9,21 @@ import { AlunoService } from './aluno.service';
 	templateUrl: './discrepancias.component.html',
 	styleUrls: ['./discrepancias.component.css']
 })
+
 export class DiscrepanciasComponent implements OnInit {
 	constructor(private alunoService: AlunoService) {}
-	alunos: Aluno[];
-	porcentagemDiscrepantes: number[] = [];
-	avaliacaoDiscrepante: boolean[] = [];
+	tests: discrepantesWrapper[] = [];
 
 	ngOnInit(): void {
 		this.alunoService.getAlunos()
 		.then(alunos => {
-			this.alunos = alunos;
-			for(let a in alunos){
-				this.porcentagemDiscrepantes[a] = this.calculaPorcentagemDiscrepantes(alunos[a]);
-				this.avaliacaoDiscrepante[a] = (this.porcentagemDiscrepantes[a] >= 0.25);
+			for(let a in alunos){				
+				this.tests[a] = new discrepantesWrapper();
+				this.tests[a].aluno = alunos[a];
+				this.tests[a].porcentagemDiscrepantes = this.calculaPorcentagemDiscrepantes(alunos[a]);
+				this.tests[a].avaliacaoDiscrepante = this.tests[a].porcentagemDiscrepantes >= 0.25;
 			}
+			this.tests.sort(this.discrepantesCompare);
 		})
 		.catch(erro => alert(erro));
 	}
@@ -42,4 +43,15 @@ export class DiscrepanciasComponent implements OnInit {
 		return ((aluno.autoAval[i] === "MA" && (aluno.metas[i]==="MPA" || aluno.metas[i]==="MANA")) ||
 		(aluno.autoAval[i] === "MPA" && aluno.metas[i]==="MANA"));
 	}
+	
+	discrepantesCompare(a:discrepantesWrapper, b:discrepantesWrapper): number {
+		return b.porcentagemDiscrepantes - a.porcentagemDiscrepantes;
+	}
+}
+
+class discrepantesWrapper {
+	constructor(){}
+	aluno: Aluno;
+	porcentagemDiscrepantes: number;
+	avaliacaoDiscrepante: boolean;
 }
