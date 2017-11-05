@@ -21,6 +21,6 @@
    <td class="conceito" [ngClass]="{'redconceito':metaDiscrepante(a.aluno, 'requisitos')}">{{a.aluno.autoAval['requisitos']}}</td>
    <td class="conceito" [ngClass]="{'redconceito':metaDiscrepante(a.aluno, 'gerDeConfiguracao')}">{{a.aluno.metas['gerDeConfiguracao']}}</td>
    <td class="conceito" [ngClass]="{'redconceito':metaDiscrepante(a.aluno, 'gerDeConfiguracao')}">{{a.aluno.autoAval['gerDeConfiguracao']}}</td>
-   <td class="conceito" [ngClass]="{'redconceito':a.avaliacao}">{{a.porcentagem*100}}%</td>
+   <td class="conceito" [ngClass]="{'redconceito':a.porcentagem >= 0.25}">{{a.porcentagem*100}}%</td>
 </tr>
 </table>

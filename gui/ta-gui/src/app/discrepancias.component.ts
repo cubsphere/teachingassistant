@@ -21,7 +21,6 @@ export class DiscrepanciasComponent implements OnInit {
 				this.alunos[a] = new wrapper();
 				this.alunos[a].aluno = alunos[a];
 				this.alunos[a].porcentagem = this.calculaPorcentagemDiscrepantes(alunos[a]);
-				this.alunos[a].avaliacao = this.alunos[a].porcentagem >= 0.25;
 			}
 			this.alunos.sort(this.discrepantesCompare);
 		})
@@ -53,5 +52,4 @@ class wrapper {
 	constructor(){}
 	aluno: Aluno;
 	porcentagem: number;
-	avaliacao: boolean;
 }
